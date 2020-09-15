@@ -8,6 +8,7 @@ using Globaltec.Models;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace Globaltec
 {
@@ -44,6 +45,15 @@ namespace Globaltec
             });
             services.AddDbContext<PersonContext>(opt => opt.UseInMemoryDatabase("Person"));
             services.AddControllers();
+            services.AddSwaggerGen(c => {
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme{
+                    Description = "Auth",
+                    Name = "Authorization", 
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,8 +63,17 @@ namespace Globaltec
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
+            app.UseSwagger();
 
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Globaltec Person API");
+                c.RoutePrefix = string.Empty;
+                c.EnableValidator(); 
+            });
+
+            app.UseRouting();
 
             app.UseCors(x => x
                 .AllowAnyOrigin()
