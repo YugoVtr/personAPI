@@ -1,195 +1,302 @@
 {
-  "_type": "export",
-  "__export_format": 4,
-  "__export_date": "2020-09-12T04:07:11.729Z",
-  "__export_source": "insomnia.desktop.app:v2020.2.0",
-  "resources": [
-    {
-      "_id": "req_c028b56c84354c889906e569a904544a",
-      "authentication": {},
-      "body": {},
-      "created": 1599882119238,
-      "description": "",
-      "headers": [],
-      "isPrivate": false,
-      "metaSortKey": -1599880784342,
-      "method": "GET",
-      "modified": 1599882133282,
-      "name": "List all Persons",
-      "parameters": [],
-      "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingFollowRedirects": "global",
-      "settingRebuildPath": true,
-      "settingSendCookies": true,
-      "settingStoreCookies": true,
-      "url": "http://localhost:5000/api/Persons",
-      "_type": "request"
-    },
-    {
-      "_id": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
-      "created": 1599880784342,
-      "description": "",
-      "environment": {},
-      "environmentPropertyOrder": null,
-      "metaSortKey": -1599880784342,
-      "modified": 1599880784342,
-      "name": "Person",
-      "parentId": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
-      "_type": "request_group"
-    },
-    {
-      "_id": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
-      "created": 1599880756173,
-      "description": "",
-      "modified": 1599880756172,
-      "name": "Globaltec",
-      "parentId": null,
-      "scope": null,
-      "_type": "workspace"
-    },
-    {
-      "_id": "req_145034f591924398a3478920e3297e48",
-      "authentication": {},
-      "body": {},
-      "created": 1599882194368,
-      "description": "",
-      "headers": [],
-      "isPrivate": false,
-      "metaSortKey": -1599880784317,
-      "method": "GET",
-      "modified": 1599882202533,
-      "name": "List a Person by ID",
-      "parameters": [],
-      "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingFollowRedirects": "global",
-      "settingRebuildPath": true,
-      "settingSendCookies": true,
-      "settingStoreCookies": true,
-      "url": "http://localhost:5000/api/Persons/2",
-      "_type": "request"
-    },
-    {
-      "_id": "req_57ff47472f484ed38cc488a979dce8e2",
-      "authentication": {},
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\n\t\"ID\": 2,\n\t\"code\": 2,\n\t\"name\": \"Mary\",\n\t\"cpf\": \"70090277147\",\n\t\"uf\": \"GO\",\n\t\"birthday\": \"2019-01-06T17:16:40\"\n}"
-      },
-      "created": 1599880813807,
-      "description": "",
-      "headers": [
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2020-09-15T06:39:26.799Z",
+    "__export_source": "insomnia.desktop.app:v2020.2.0",
+    "resources": [
         {
-          "id": "pair_81ebac238a0a4cfeb940a773a450e426",
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
-      "isPrivate": false,
-      "metaSortKey": -1599880784292,
-      "method": "POST",
-      "modified": 1599883157017,
-      "name": "Create new Person",
-      "parameters": [],
-      "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingFollowRedirects": "global",
-      "settingRebuildPath": true,
-      "settingSendCookies": true,
-      "settingStoreCookies": true,
-      "url": "http://localhost:5000/api/Persons",
-      "_type": "request"
-    },
-    {
-      "_id": "req_8f39b8507a6640dd84a2ab118354ad78",
-      "authentication": {},
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\n\t\"ID\": 2,\n\t\"code\": 2,\n\t\"name\": \"Mario Jorge\",\n\t\"cpf\": \"70090277147\",\n\t\"uf\": \"DF\",\n\t\"birthday\": \"2019-01-06T17:16:40\"\n}"
-      },
-      "created": 1599882493804,
-      "description": "",
-      "headers": [
+            "_id": "req_c028b56c84354c889906e569a904544a",
+            "authentication": {},
+            "body": {},
+            "created": 1599882119238,
+            "description": "",
+            "headers": [
+                {
+                    "description": "",
+                    "id": "pair_2a5aa5fd19944b2aadb6b10f10027bd5",
+                    "name": "Authorization",
+                    "value": "Bearer {{ token  }}"
+                }
+            ],
+            "isPrivate": false,
+            "metaSortKey": -1599880784342,
+            "method": "GET",
+            "modified": 1600150047471,
+            "name": "List all Persons",
+            "parameters": [],
+            "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingFollowRedirects": "global",
+            "settingRebuildPath": true,
+            "settingSendCookies": true,
+            "settingStoreCookies": true,
+            "url": "http://{{ base_url  }}/api/Persons",
+            "_type": "request"
+        },
         {
-          "id": "pair_81ebac238a0a4cfeb940a773a450e426",
-          "name": "Content-Type",
-          "value": "application/json"
+            "_id": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
+            "created": 1599880784342,
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1599880784342,
+            "modified": 1599880784342,
+            "name": "Person",
+            "parentId": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
+            "_type": "request_group"
+        },
+        {
+            "_id": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
+            "created": 1599880756173,
+            "description": "",
+            "modified": 1599880756172,
+            "name": "Globaltec",
+            "parentId": null,
+            "scope": null,
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_b5366465dd7d47b19941c04d7c59b3e3",
+            "authentication": {},
+            "body": {},
+            "created": 1599889994120,
+            "description": "",
+            "headers": [
+                {
+                    "description": "",
+                    "id": "pair_ef88440cd20d45d8ad3471305056feb7",
+                    "name": "Authorization",
+                    "value": "Bearer {{ token  }}"
+                }
+            ],
+            "isPrivate": false,
+            "metaSortKey": -1599880784329.5,
+            "method": "GET",
+            "modified": 1600150107290,
+            "name": "List all people by UF",
+            "parameters": [],
+            "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingFollowRedirects": "global",
+            "settingRebuildPath": true,
+            "settingSendCookies": true,
+            "settingStoreCookies": true,
+            "url": "http://{{ base_url  }}/api/Persons?Uf={{ person_uf  }}",
+            "_type": "request"
+        },
+        {
+            "_id": "req_145034f591924398a3478920e3297e48",
+            "authentication": {},
+            "body": {},
+            "created": 1599882194368,
+            "description": "",
+            "headers": [
+                {
+                    "description": "",
+                    "id": "pair_271f4853150e4d1fa057570c01afc2bb",
+                    "name": "Authorization",
+                    "value": "Bearer {{ token  }}"
+                }
+            ],
+            "isPrivate": false,
+            "metaSortKey": -1599880784317,
+            "method": "GET",
+            "modified": 1600150109657,
+            "name": "List a Person by ID",
+            "parameters": [],
+            "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingFollowRedirects": "global",
+            "settingRebuildPath": true,
+            "settingSendCookies": true,
+            "settingStoreCookies": true,
+            "url": "http://{{ base_url  }}/api/Persons/{{ person_id  }}",
+            "_type": "request"
+        },
+        {
+            "_id": "req_57ff47472f484ed38cc488a979dce8e2",
+            "authentication": {},
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"code\": 1,\n\t\"name\": \"{% prompt 'name for user', 'set name for user', 'Jack', '', false, true %}\",\n\t\"cpf\": \"47811668572\",\n\t\"uf\": \"{{ person_uf  }}\",\n\t\"birthday\": \"{% now 'custom', 'YYYY-MM-DD' %}\"\n}"
+            },
+            "created": 1599880813807,
+            "description": "",
+            "headers": [
+                {
+                    "id": "pair_81ebac238a0a4cfeb940a773a450e426",
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "description": "",
+                    "id": "pair_77e1ed0f4e9d4493ad99d035e6e26ba5",
+                    "name": "Authorization",
+                    "value": "Bearer {{ token  }}"
+                }
+            ],
+            "isPrivate": false,
+            "metaSortKey": -1599880784292,
+            "method": "POST",
+            "modified": 1600150112213,
+            "name": "Create new Person",
+            "parameters": [],
+            "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingFollowRedirects": "global",
+            "settingRebuildPath": true,
+            "settingSendCookies": true,
+            "settingStoreCookies": true,
+            "url": "http://{{ base_url  }}/api/Persons",
+            "_type": "request"
+        },
+        {
+            "_id": "req_78bfa380d11f4f9e805b613fdd5856fb",
+            "authentication": {},
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin\"\n}"
+            },
+            "created": 1600149280357,
+            "description": "",
+            "headers": [
+                {
+                    "id": "pair_81ebac238a0a4cfeb940a773a450e426",
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "isPrivate": false,
+            "metaSortKey": -1598519049046,
+            "method": "POST",
+            "modified": 1600150373702,
+            "name": "Authenticate",
+            "parameters": [],
+            "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingFollowRedirects": "global",
+            "settingRebuildPath": true,
+            "settingSendCookies": true,
+            "settingStoreCookies": true,
+            "url": "http://{{ base_url  }}/api/Persons/login",
+            "_type": "request"
+        },
+        {
+            "_id": "req_8f39b8507a6640dd84a2ab118354ad78",
+            "authentication": {},
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"id\": {{ person_id  }},\n\t\"code\": 1,\n\t\"name\": \"{% prompt 'new name for person', 'set a new name', 'altered name', '', false, true %}\",\n\t\"cpf\": \"40510766951\",\n\t\"uf\": \"{{ person_uf  }}\",\n\t\"birthday\": \"{% now 'custom', 'YYYY-MM-DD' %}\"\n}"
+            },
+            "created": 1599882493804,
+            "description": "",
+            "headers": [
+                {
+                    "id": "pair_81ebac238a0a4cfeb940a773a450e426",
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "description": "",
+                    "id": "pair_c7615e258bdf40dfa873fdbd2a46a9a5",
+                    "name": "Authorization",
+                    "value": "Bearer {{ token  }}"
+                }
+            ],
+            "isPrivate": false,
+            "metaSortKey": -1597157313800,
+            "method": "PUT",
+            "modified": 1600150114539,
+            "name": "Upate existing Person",
+            "parameters": [],
+            "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingFollowRedirects": "global",
+            "settingRebuildPath": true,
+            "settingSendCookies": true,
+            "settingStoreCookies": true,
+            "url": "http://{{ base_url  }}/api/Persons/{{ person_id  }}",
+            "_type": "request"
+        },
+        {
+            "_id": "req_24cd4cf582624d959f0e0ba4fb621b50",
+            "authentication": {},
+            "body": {},
+            "created": 1599882736133,
+            "description": "",
+            "headers": [
+                {
+                    "description": "",
+                    "id": "pair_8d10cce594ad4d06a1a3c1c3f04e44ad",
+                    "name": "Authorization",
+                    "value": "Bearer {{ token  }}"
+                }
+            ],
+            "isPrivate": false,
+            "metaSortKey": -1597157313750,
+            "method": "DELETE",
+            "modified": 1600150122803,
+            "name": "Delete a Person by ID",
+            "parameters": [],
+            "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingFollowRedirects": "global",
+            "settingRebuildPath": true,
+            "settingSendCookies": true,
+            "settingStoreCookies": true,
+            "url": "http://{{ base_url  }}/api/Persons/{{ person_id  }}",
+            "_type": "request"
+        },
+        {
+            "_id": "env_ec8e9f5b71bdb9cd2f53cfb14de12dea4942107e",
+            "color": null,
+            "created": 1599880756333,
+            "data": {
+                "base_url": "localhost:5000",
+                "person_id": "{% response 'body', 'req_57ff47472f484ed38cc488a979dce8e2', 'b64::JC5pZA==::46b', 'never' %}",
+                "person_uf": "GO",
+                "token": "{% response 'body', 'req_78bfa380d11f4f9e805b613fdd5856fb', 'b64::JC50b2tlbg==::46b', 'never' %}"
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "base_url",
+                    "token",
+                    "person_id",
+                    "person_uf"
+                ]
+            },
+            "isPrivate": false,
+            "metaSortKey": 1599880756333,
+            "modified": 1600151901949,
+            "name": "Base Environment",
+            "parentId": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_ec8e9f5b71bdb9cd2f53cfb14de12dea4942107e",
+            "cookies": [],
+            "created": 1599880756335,
+            "modified": 1599880756335,
+            "name": "Default Jar",
+            "parentId": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
+            "_type": "cookie_jar"
+        },
+        {
+            "_id": "spc_c015e4655f904e35bfab5a10edf47cdf",
+            "contentType": "yaml",
+            "contents": "",
+            "created": 1599880756190,
+            "fileName": "Globaltec",
+            "modified": 1599880756190,
+            "parentId": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
+            "_type": "api_spec"
         }
-      ],
-      "isPrivate": false,
-      "metaSortKey": -1597157313800,
-      "method": "PUT",
-      "modified": 1599883440629,
-      "name": "Upate existing Person",
-      "parameters": [],
-      "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingFollowRedirects": "global",
-      "settingRebuildPath": true,
-      "settingSendCookies": true,
-      "settingStoreCookies": true,
-      "url": "http://localhost:5000/api/Persons/2",
-      "_type": "request"
-    },
-    {
-      "_id": "req_24cd4cf582624d959f0e0ba4fb621b50",
-      "authentication": {},
-      "body": {},
-      "created": 1599882736133,
-      "description": "",
-      "headers": [],
-      "isPrivate": false,
-      "metaSortKey": -1597157313750,
-      "method": "DELETE",
-      "modified": 1599882761593,
-      "name": "Delete a Person by ID",
-      "parameters": [],
-      "parentId": "fld_351eb7b22f1d4d33871d2cb76bcaf64b",
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingFollowRedirects": "global",
-      "settingRebuildPath": true,
-      "settingSendCookies": true,
-      "settingStoreCookies": true,
-      "url": "http://localhost:5000/api/Persons/2",
-      "_type": "request"
-    },
-    {
-      "_id": "env_ec8e9f5b71bdb9cd2f53cfb14de12dea4942107e",
-      "color": null,
-      "created": 1599880756333,
-      "data": {},
-      "dataPropertyOrder": null,
-      "isPrivate": false,
-      "metaSortKey": 1599880756333,
-      "modified": 1599880756333,
-      "name": "Base Environment",
-      "parentId": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
-      "_type": "environment"
-    },
-    {
-      "_id": "jar_ec8e9f5b71bdb9cd2f53cfb14de12dea4942107e",
-      "cookies": [],
-      "created": 1599880756335,
-      "modified": 1599880756335,
-      "name": "Default Jar",
-      "parentId": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
-      "_type": "cookie_jar"
-    },
-    {
-      "_id": "spc_c015e4655f904e35bfab5a10edf47cdf",
-      "contentType": "yaml",
-      "contents": "",
-      "created": 1599880756190,
-      "fileName": "Globaltec",
-      "modified": 1599880756190,
-      "parentId": "wrk_76d3cfab6ade4b73aa43bf66ffd1a618",
-      "_type": "api_spec"
-    }
-  ]
+    ]
 }

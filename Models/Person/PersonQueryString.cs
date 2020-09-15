@@ -1,8 +1,8 @@
 
-namespace Globaltec
+namespace Globaltec.Models
 {
-  public class PersonQueryString
-  {
-      public string Uf { get; set; }
-  } 
-} 
+    public class PersonQueryString
+    {
+        public string Uf { get; set; }
+    }
+}
