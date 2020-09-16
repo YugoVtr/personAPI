@@ -4,12 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Globaltec.Models;
-using Globaltec.Services;
-using Globaltec.Repositories;
 using Microsoft.AspNetCore.Authorization;
 namespace Globaltec.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/persons")]
     [ApiController]
     public class PersonsController : ControllerBase
     {
@@ -20,25 +18,7 @@ namespace Globaltec.Controllers
             _context = context;
         }
 
-        [HttpPost]
-        [Route("login")]
-        [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody] User model)
-        {
-            var user = UserRepository.Get(model.Username, model.Password);
-            if (user == null) return NotFound(new { message = "Invalid user or password" });
-
-            var token = TokenService.GenerateToken(user);
-            user.Password = "";
-
-            return new
-            {
-                user = user,
-                token = token
-            };
-        }
-
-        // GET: api/Persons
+        // GET: api/persons
         [HttpGet]
         [Authorize(Roles = "manager")]
         public async Task<ActionResult<IEnumerable<Person>>> GetPersons([FromQuery] PersonQueryString query)
@@ -48,25 +28,22 @@ namespace Globaltec.Controllers
               .ToListAsync();
         }
 
-        // GET: api/Persons/5
+        // GET: api/persons/5
         [HttpGet("{id}")]
         [Authorize(Roles = "manager")]
         public async Task<ActionResult<Person>> GetPerson(int id)
         {
             var person = await _context.Persons.FindAsync(id);
-
             if (person == null) return NotFound();
-
             return person;
         }
 
-        // PUT: api/Persons/5
+        // PUT: api/persons/5
         [HttpPut("{id}")]
         [Authorize(Roles = "manager")]
         public async Task<IActionResult> PutPerson(int id, Person person)
         {
             if (id != person.Id) return BadRequest();
-
             _context.Entry(person).State = EntityState.Modified;
 
             try
@@ -85,7 +62,7 @@ namespace Globaltec.Controllers
             );
         }
 
-        // POST: api/Persons
+        // POST: api/persons
         [HttpPost]
         [Authorize(Roles = "manager")]
         public async Task<ActionResult<Person>> PostPerson(Person person)
@@ -100,20 +77,16 @@ namespace Globaltec.Controllers
             );
         }
 
-        // DELETE: api/Persons/5
+        // DELETE: api/persons/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "manager")]
         public async Task<ActionResult<Person>> DeletePerson(int id)
         {
             var person = await _context.Persons.FindAsync(id);
-            if (person == null)
-            {
-                return NotFound();
-            }
-
+            if (person == null) return NotFound();
+            
             _context.Persons.Remove(person);
             await _context.SaveChangesAsync();
-
             return person;
         }
 
