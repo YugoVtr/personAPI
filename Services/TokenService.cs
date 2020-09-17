@@ -19,8 +19,9 @@ namespace Globaltec.Services
         public string generateToken(IUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            string hash = Configuration["Settings:Secret"];
+            string hash = Configuration["Token:Secret"];
             byte[] key = Encoding.ASCII.GetBytes(hash);
+            int expireTimeMinutes = int.Parse( Configuration["Token:Expire"] );
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -28,7 +29,7 @@ namespace Globaltec.Services
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim(ClaimTypes.Role, user.Role)
                 }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddMinutes(expireTimeMinutes),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

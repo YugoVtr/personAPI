@@ -24,10 +24,11 @@ namespace Globaltec
 
         public void ConfigureServices(IServiceCollection services)
         {
+            string hash = Configuration["Token:Secret"];
+            byte[] key = Encoding.ASCII.GetBytes(hash);
+
             services.AddCors();
             services.AddScoped<ITokenService, TokenService>();
-            string hash = Configuration["Settings:Secret"];
-            byte[] key = Encoding.ASCII.GetBytes(hash);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -45,6 +46,7 @@ namespace Globaltec
                     ValidateAudience = false
                 };
             });
+
             services.AddDbContext<PersonContext>(opt => opt.UseInMemoryDatabase("Person"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
