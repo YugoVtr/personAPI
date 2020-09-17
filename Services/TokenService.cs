@@ -21,7 +21,7 @@ namespace Globaltec.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             string hash = Configuration["Token:Secret"];
             byte[] key = Encoding.ASCII.GetBytes(hash);
-            int expireTimeMinutes = int.Parse( Configuration["Token:Expire"] );
+            int expireTimeMinutes = int.Parse(Configuration["Token:Expire"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Globaltec.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+
 namespace Globaltec.Controllers
 {
     [Route("api/persons")]
@@ -18,81 +20,141 @@ namespace Globaltec.Controllers
             _context = context;
         }
 
-        // GET: api/persons
+        /// <summary>
+        /// list all persons (query by UF enable)
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "manager")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<ActionResult<IEnumerable<Person>>> GetPersons([FromQuery] PersonQueryString query)
         {
-            return await _context.Persons
-              .Where(p => query.Uf == null || p.Uf == query.Uf)
-              .ToListAsync();
-        }
-
-        // GET: api/persons/5
-        [HttpGet("{id}")]
-        [Authorize(Roles = "manager")]
-        public async Task<ActionResult<Person>> GetPerson(int id)
-        {
-            var person = await _context.Persons.FindAsync(id);
-            if (person == null) return NotFound();
-            return person;
-        }
-
-        // PUT: api/persons/5
-        [HttpPut("{id}")]
-        [Authorize(Roles = "manager")]
-        public async Task<IActionResult> PutPerson(int id, Person person)
-        {
-            if (id != person.Id) return BadRequest();
-            _context.Entry(person).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                return await _context.Persons
+                    .Where(p => query.Uf == null || p.Uf == query.Uf)
+                    .ToListAsync();
             }
-            catch (DbUpdateConcurrencyException) when (!PersonExists(id))
+            catch (System.Exception)
+            {
+                return UnprocessableEntity();
+            }
+        }
+
+        /// <summary>
+        /// list a person by code
+        /// </summary>
+        [HttpGet("{code}")]
+        [Authorize(Roles = "manager")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Person>> GetPerson(int code)
+        {
+            try
+            {
+                var person = await _context.Persons.FindAsync(code);
+                if (person == null) return NotFound();
+                return person;
+            }
+            catch (System.Exception)
+            {
+                return UnprocessableEntity();
+            }
+        }
+
+        /// <summary>
+        /// update a person
+        /// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPut("{code}")]
+        [Authorize(Roles = "manager")]
+        public async Task<IActionResult> PutPerson(int code, Person person)
+        {
+            try
+            {
+                if (code != person.Code) return BadRequest();
+                _context.Entry(person).State = EntityState.Modified;
+
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(
+                    nameof(GetPerson),
+                    new { code = person.Code, person },
+                    person
+                );
+            }
+            catch (DbUpdateConcurrencyException) when (!PersonExists(code))
             {
                 return NotFound();
             }
-
-            return CreatedAtAction(
-              nameof(GetPerson),
-              new { id = person.Id, person },
-              person
-            );
+            catch (System.Exception)
+            {
+                return UnprocessableEntity();
+            }
         }
 
-        // POST: api/persons
+        /// <summary>
+        /// create a new person
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "manager")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<ActionResult<Person>> PostPerson(Person person)
         {
-            _context.Persons.Add(person);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Persons.Add(person);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction(
-              nameof(GetPerson),
-              new { id = person.Id, person },
-              person
-            );
+                return CreatedAtAction(
+                nameof(GetPerson),
+                new { code = person.Code, person },
+                person
+                );
+            }
+            catch (System.Exception)
+            {
+                return UnprocessableEntity();
+            }
         }
 
-        // DELETE: api/persons/5
-        [HttpDelete("{id}")]
+        /// <summary>
+        /// delete a person by code
+        /// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("{code}")]
         [Authorize(Roles = "manager")]
-        public async Task<ActionResult<Person>> DeletePerson(int id)
+        public async Task<ActionResult<Person>> DeletePerson(int code)
         {
-            var person = await _context.Persons.FindAsync(id);
-            if (person == null) return NotFound();
+            try
+            {
+                var person = await _context.Persons.FindAsync(code);
+                if (person == null) return NotFound();
 
-            _context.Persons.Remove(person);
-            await _context.SaveChangesAsync();
-            return person;
+                _context.Persons.Remove(person);
+                await _context.SaveChangesAsync();
+                return person;
+            }
+            catch (System.Exception)
+            {
+                return UnprocessableEntity();
+            }
         }
 
-        private bool PersonExists(int id)
+        private bool PersonExists(int code)
         {
-            return _context.Persons.Any(e => e.Id == id);
+            return _context.Persons.Any(e => e.Code == code);
         }
     }
 }

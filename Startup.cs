@@ -10,7 +10,10 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Globaltec.Models;
 using Globaltec.Services;
-
+using System.Reflection;
+using System;
+using System.IO;
+using System.Collections.Generic;
 namespace Globaltec
 {
     public class Startup
@@ -53,12 +56,26 @@ namespace Globaltec
             {
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Auth",
-                    Name = "Authorization",
                     In = ParameterLocation.Header,
+                    Description = "Autentication based on Json Web Token (JWT)",
+                    Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
+                    Scheme = "Bearer "
                 });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                   {
+                       new OpenApiSecurityScheme
+                       {
+                           Reference = new OpenApiReference {
+                               Type = ReferenceType.SecurityScheme,
+                               Id = "Bearer" }
+                       }, new List<string>() }
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
