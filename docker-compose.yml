@@ -7,13 +7,3 @@ services:
             - "80:80"
         volumes:
             - ./:/src
-        depends_on:
-            - sqldata
-
-    sqldata:
-        image: mcr.microsoft.com/mssql/server:latest
-        environment:
-            - SA_PASSWORD=Pass@word
-            - ACCEPT_EULA=Y
-        ports:
-            - "1433:1433"
