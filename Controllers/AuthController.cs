@@ -1,15 +1,21 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Globaltec.Models;
 using Globaltec.Services;
 using Globaltec.Repositories;
-using Microsoft.AspNetCore.Authorization;
 namespace Globaltec.Controllers
 {
     [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
+        public ITokenService TokenService { get; }
+        public AuthController(ITokenService tokenService)
+        {
+            TokenService = tokenService;
+        }
+
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
@@ -18,7 +24,7 @@ namespace Globaltec.Controllers
             var user = UserRepository.Get(model.Username, model.Password);
             if (user == null) return NotFound(new { message = "Invalid user or password" });
 
-            var token = TokenService.GenerateToken(user);
+            var token = TokenService.generateToken(user);
             user.Password = "";
 
             return new

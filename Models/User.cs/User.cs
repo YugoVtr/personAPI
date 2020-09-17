@@ -1,8 +1,6 @@
-using System;
-
 namespace Globaltec.Models
 {
-    public class User
+    public class User : IUser
     {
         public int Id { get; set; }
         public string Username { get; set; }

@@ -84,7 +84,7 @@ namespace Globaltec.Controllers
         {
             var person = await _context.Persons.FindAsync(id);
             if (person == null) return NotFound();
-            
+
             _context.Persons.Remove(person);
             await _context.SaveChangesAsync();
             return person;
